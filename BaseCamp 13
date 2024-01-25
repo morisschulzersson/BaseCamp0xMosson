@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+import { SillyStringUtils } from "./silly-string-utils.sol";
+
+
+contract Imports {
+    // Add a public instance of Haiku called haiku.
+    SillyStringUtils.Haiku public haiku;
+
+    // saveHaiku should accept three strings and save them as the lines of haiku.
+    function saveHaiku(string memory _line1, string memory _line2, string memory _line3) public {
+        haiku.line1 = _line1;
+        haiku.line2 = _line2;
+        haiku.line3 = _line3;
+    }
+
+    // getHaiku should return the haiku as a Haiku type.
+    function getHaiku() public view returns (SillyStringUtils.Haiku memory) {
+        return haiku;
+    }
+
+    // shruggieHaiku should use the library to add 🤷 to the end of line3. It must not modify the original haiku.
+    function shruggieHaiku() public view returns (SillyStringUtils.Haiku memory) {
+        return SillyStringUtils.Haiku(
+            haiku.line1,
+            haiku.line2,
+            SillyStringUtils.shruggie(haiku.line3)
+        );
+    }
+}
